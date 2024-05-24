@@ -1,0 +1,23 @@
+{
+  "name": "eventmeet-backend",
+  "version": "0.0.1",
+  "description": "",
+  "main": "app/app.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "nodemon app/app.ts",
+    "bundle": "ncc build app/app.ts -o dist"
+  },
+  "author": "gokhangunduz",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "ts-node": "^10.9.2"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21"
+  }
+}
