@@ -1,9 +1,10 @@
 import express, { Request, Response, NextFunction } from "express";
 import logger from "./src/functions/logger.function";
-import appRoutes from "./src/routes/app.routes";
 import env from "./src/providers/env.provider";
 import bodyParser from "body-parser";
 import cors from "cors";
+import appRouters from "./src/routers/app.routers";
+import eventsRouters from "./src/routers/events.routers";
 
 async function app(): Promise<void> {
   const app = express();
@@ -21,7 +22,9 @@ async function app(): Promise<void> {
     })
   );
 
-  app.use("/", appRoutes);
+  app.use("/", appRouters);
+
+  app.use("/events", eventsRouters);
 
   const server = app.listen(env.port);
 
