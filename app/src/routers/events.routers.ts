@@ -1,14 +1,14 @@
 import express from "express";
-import eventsServices from "../services/events.services";
+import eventsController from "../controllers/events.controller";
 
 const router = express.Router();
 
-router.get("/", eventsServices.get);
+router.get("/", eventsController.get);
 
-router.post("/", eventsServices.post);
+router.post("/", eventsController.post);
 
-router.put("/:id", eventsServices.put);
+router.put("/:id", eventsController.put);
 
-router.delete("/:id", eventsServices.remove);
+router.delete("/:id", eventsController.remove);
 
 export default router;

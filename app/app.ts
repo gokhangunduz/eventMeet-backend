@@ -1,10 +1,12 @@
 import express, { Request, Response, NextFunction } from "express";
+import environments from "./src/providers/environments.provider";
+import eventsRouters from "./src/routers/events.routers";
+import usersRouters from "./src/routers/users.routers";
 import logger from "./src/functions/logger.function";
-import env from "./src/providers/env.provider";
+import appRouters from "./src/routers/app.routers";
 import bodyParser from "body-parser";
 import cors from "cors";
-import appRouters from "./src/routers/app.routers";
-import eventsRouters from "./src/routers/events.routers";
+import { verifyToken } from "./src/functions/tokener.function";
 
 async function app(): Promise<void> {
   const app = express();
@@ -24,9 +26,11 @@ async function app(): Promise<void> {
 
   app.use("/", appRouters);
 
+  app.use("/users", usersRouters);
+
   app.use("/events", eventsRouters);
 
-  const server = app.listen(env.port);
+  const server = app.listen(environments.application.port);
 
   process.on("SIGINT", () => {
     server.close(() => {

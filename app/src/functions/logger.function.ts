@@ -1,4 +1,4 @@
-export default function logger(log: string) {
+export default function (log: string) {
   console.log(
     `[${new Date(Date.now())
       .toLocaleString(`en-US`, {
