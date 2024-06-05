@@ -7,7 +7,7 @@ export default class User {
   public id: string;
   public username: string;
   public gender: string;
-  public nationailty: string;
+  public nationality: string;
   public biography: string;
   public firstName: string;
   public lastName: string;
@@ -23,7 +23,7 @@ export default class User {
     id: string = generateUserID,
     username: string,
     gender: string,
-    nationailty: string,
+    nationality: string,
     biography: string,
     firstName: string,
     lastName: string,
@@ -38,7 +38,7 @@ export default class User {
     this.id = id;
     this.username = username;
     this.gender = gender;
-    this.nationailty = nationailty;
+    this.nationality = nationality;
     this.biography = biography;
     this.firstName = firstName;
     this.lastName = lastName;

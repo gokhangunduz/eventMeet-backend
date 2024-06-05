@@ -6,7 +6,6 @@ import logger from "./src/function/logger.function";
 import appRouters from "./src/router/app.router";
 import bodyParser from "body-parser";
 import cors from "cors";
-import { encodePassword } from "./src/helper/password.helper";
 
 async function app(): Promise<void> {
   const app = express();

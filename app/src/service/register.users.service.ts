@@ -4,12 +4,13 @@ import responser from "../function/responser.function";
 import mongoDB from "../client/mongo.client";
 import { Request, Response } from "express";
 import User from "../class/user.class";
+import { hashPassword } from "../helper/password.helper";
 
 export default async function registerUserService(req: Request, res: Response) {
   const {
     username,
     gender,
-    nationailty,
+    nationality,
     biography,
     firstName,
     lastName,
@@ -20,7 +21,7 @@ export default async function registerUserService(req: Request, res: Response) {
   }: {
     username: string;
     gender: string;
-    nationailty: string;
+    nationality: string;
     biography: string;
     firstName: string;
     lastName: string;
@@ -33,7 +34,7 @@ export default async function registerUserService(req: Request, res: Response) {
   if (
     !username ||
     !gender ||
-    !nationailty ||
+    !nationality ||
     !biography ||
     !hobbies ||
     !firstName ||
@@ -77,13 +78,13 @@ export default async function registerUserService(req: Request, res: Response) {
     undefined,
     username,
     gender,
-    nationailty,
+    nationality,
     biography,
     firstName,
     lastName,
     phoneNumber,
     email,
-    password,
+    await hashPassword(password),
     hobbies
   );
 
