@@ -1,9 +1,9 @@
-import registerUserService from "../services/register.users.service";
-import loginUserService from "../services/login.users.service";
-import logoutUserService from "../services/logout.users.service";
-import responser from "../functions/responser.function";
+import registerUserService from "../service/register.users.service";
+import loginUserService from "../service/login.users.service";
+import logoutUserService from "../service/logout.users.service";
+import responser from "../function/responser.function";
 import { Request, Response } from "express";
-import refreshUsersService from "../services/renew.users.service";
+import refreshUsersService from "../service/renew.users.service";
 
 async function register(req: Request, res: Response) {
   try {

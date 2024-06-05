@@ -1,5 +1,5 @@
 import { MongoClient } from "mongodb";
-import env from "../providers/environments.provider";
+import env from "../provider/environments.provider";
 
 const mongoDB = new MongoClient(env.database.url)?.db(env.database.name);
 

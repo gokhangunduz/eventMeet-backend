@@ -1,4 +1,4 @@
-import environments from "../providers/environments.provider";
+import environments from "../provider/environments.provider";
 import { getUserByID } from "../database/users.database";
 import { decodeJwt, jwtVerify, SignJWT } from "jose";
 import User from "../class/user.class";

@@ -1,7 +1,7 @@
-import environments from "../providers/environments.provider";
+import environments from "../provider/environments.provider";
 import { createUser } from "../database/users.database";
-import responser from "../functions/responser.function";
-import mongoDB from "../clients/mongo.client";
+import responser from "../function/responser.function";
+import mongoDB from "../client/mongo.client";
 import { Request, Response } from "express";
 import User from "../class/user.class";
 

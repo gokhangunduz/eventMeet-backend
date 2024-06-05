@@ -1,5 +1,5 @@
-import environments from "../providers/environments.provider";
-import mongoDB from "../clients/mongo.client";
+import environments from "../provider/environments.provider";
+import mongoDB from "../client/mongo.client";
 import User from "../class/user.class";
 
 async function createUser(user: User): Promise<void> {

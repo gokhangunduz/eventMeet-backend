@@ -1,9 +1,9 @@
 import express, { Request, Response, NextFunction } from "express";
-import environments from "./src/providers/environments.provider";
-import eventsRouters from "./src/routers/events.routers";
-import usersRouters from "./src/routers/users.routers";
-import logger from "./src/functions/logger.function";
-import appRouters from "./src/routers/app.routers";
+import environments from "./src/provider/environments.provider";
+import eventsRouters from "./src/router/events.router";
+import usersRouters from "./src/router/users.router";
+import logger from "./src/function/logger.function";
+import appRouters from "./src/router/app.router";
 import bodyParser from "body-parser";
 import cors from "cors";
 import { encodePassword } from "./src/helper/password.helper";

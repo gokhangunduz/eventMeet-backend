@@ -1,5 +1,5 @@
-import { verifyToken } from "../functions/tokener.function";
-import responser from "../functions/responser.function";
+import { verifyToken } from "../function/tokener.function";
+import responser from "../function/responser.function";
 import { Token } from "../class/token.class";
 import { Request, Response } from "express";
 

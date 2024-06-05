@@ -1,7 +1,7 @@
 import {
   generateTokens as voidGenerateTokens,
   renewTokens as voidRenewTokens,
-} from "../functions/tokener.function";
+} from "../function/tokener.function";
 import User from "./user.class";
 
 export class Token {

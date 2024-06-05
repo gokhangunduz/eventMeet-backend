@@ -1,5 +1,5 @@
 import { getUserByEmail } from "../database/users.database";
-import responser from "../functions/responser.function";
+import responser from "../function/responser.function";
 import { Token } from "../class/token.class";
 import { Request, Response } from "express";
 

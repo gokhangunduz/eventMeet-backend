@@ -1,4 +1,4 @@
-import { IEnvironment } from "../interfaces/env.interface";
+import { IEnvironment } from "../interface/env.interface";
 import dotenv from "dotenv";
 
 dotenv.config();
