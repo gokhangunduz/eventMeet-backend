@@ -1,15 +1,41 @@
-import User from "../class/user.class";
-import { Request, Response } from "express";
-import mongoDB from "../clients/mongo.client";
-import responser from "../functions/responser.function";
 import environments from "../providers/environments.provider";
+import { createUser } from "../database/users.database";
+import responser from "../functions/responser.function";
+import mongoDB from "../clients/mongo.client";
+import { Request, Response } from "express";
+import User from "../class/user.class";
 
 export default async function registerUserService(req: Request, res: Response) {
-  const { username, firstName, lastName, phoneNumber, email, password } =
-    req.body;
+  const {
+    username,
+    gender,
+    nationailty,
+    biography,
+    firstName,
+    lastName,
+    phoneNumber,
+    email,
+    password,
+    hobbies,
+  }: {
+    username: string;
+    gender: string;
+    nationailty: string;
+    biography: string;
+    firstName: string;
+    lastName: string;
+    phoneNumber: string;
+    email: string;
+    password: string;
+    hobbies: string[];
+  } = req.body;
 
   if (
     !username ||
+    !gender ||
+    !nationailty ||
+    !biography ||
+    !hobbies ||
     !firstName ||
     !lastName ||
     !phoneNumber ||
@@ -48,17 +74,20 @@ export default async function registerUserService(req: Request, res: Response) {
   }
 
   const user = new User(
+    undefined,
     username,
+    gender,
+    nationailty,
+    biography,
     firstName,
     lastName,
     phoneNumber,
     email,
-    password
+    password,
+    hobbies
   );
 
-  await mongoDB
-    .collection(environments.database.collections.users)
-    .insertOne(user);
+  await createUser(user);
 
   responser(res, 200, "User created.");
 }

@@ -1,7 +1,7 @@
 import logger from "./logger.function";
 import { Response } from "express";
 
-export default function (
+export default function responser(
   response: Response,
   status: number,
   message: string,

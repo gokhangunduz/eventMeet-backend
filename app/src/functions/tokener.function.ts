@@ -1,23 +1,12 @@
 import environments from "../providers/environments.provider";
+import { getUserByID } from "../database/users.database";
+import { decodeJwt, jwtVerify, SignJWT } from "jose";
 import User from "../class/user.class";
-import * as jwt from "jose";
 
-export async function generateToken(user: User): Promise<{
-  accessToken: string;
-  refreshToken: string;
-}> {
+export async function generateTokens(user: User) {
   const secretKey = new TextEncoder().encode(environments.jwt.secret);
 
-  const payload = {
-    id: user.id,
-    username: user.username,
-    firstName: user.firstName,
-    lastName: user.lastName,
-    email: user.email,
-    phoneNumber: user.phoneNumber,
-  };
-
-  const accessToken = await new jwt.SignJWT(payload)
+  const accessToken = await new SignJWT({ ...user })
     .setProtectedHeader({
       alg: "HS256",
     })
@@ -25,7 +14,7 @@ export async function generateToken(user: User): Promise<{
     .setExpirationTime(environments.jwt.accessTokenExp)
     .sign(Uint8Array.from(secretKey));
 
-  const refreshToken = await new jwt.SignJWT(payload)
+  const refreshToken = await new SignJWT({ ...user })
     .setProtectedHeader({
       alg: "HS256",
     })
@@ -36,15 +25,25 @@ export async function generateToken(user: User): Promise<{
   return { accessToken, refreshToken };
 }
 
-export async function verifyToken(
-  token: string
-): Promise<{ isValid: boolean; message: string }> {
+export async function renewTokens(refreshToken: string) {
+  const refreshJWT = decodeJwt(refreshToken) as any;
+
+  const user = await getUserByID(refreshJWT.id);
+
+  const tokens = await generateTokens(user!);
+
+  return { ...tokens };
+}
+
+export async function verifyToken(token: string): Promise<{
+  isValid: boolean;
+  message: string;
+}> {
   const secretKey = new TextEncoder().encode(environments.jwt.secret);
 
-  const result = await jwt
-    .jwtVerify(token, secretKey, {
-      algorithms: ["HS256"],
-    })
+  const result = await jwtVerify(token, secretKey, {
+    algorithms: ["HS256"],
+  })
     .then(() => {
       return {
         isValid: true,
