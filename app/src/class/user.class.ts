@@ -20,7 +20,6 @@ export default class User {
   public isVerifiedPhoneNumber: boolean;
 
   constructor(
-    id: string = generateUserID,
     username: string,
     gender: string,
     nationality: string,
@@ -31,6 +30,7 @@ export default class User {
     email: string,
     password: string,
     hobbies: string[],
+    id: string = generateUserID,
     registeredAt: number = generateCurrentUnixTimeStamp,
     isVerifiedEmail: boolean = false,
     isVerifiedPhoneNumber: boolean = false

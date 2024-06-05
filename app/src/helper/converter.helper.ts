@@ -1,11 +1,13 @@
-import * as jwt from "jose";
+import { decodeJwt } from "jose";
 
-export function BearerToJWT(token: string) {
-  const jwtToken = token.split(" ")[1];
+export function BearerToJWT(bearerToken: string) {
+  const token = bearerToken.split(" ")[1];
 
-  return jwt.decodeJwt(jwtToken);
+  const JWTToken = tokenToJWT(token);
+
+  return JWTToken;
 }
 
 export function tokenToJWT(token: string) {
-  return jwt.decodeJwt(token) as any;
+  return decodeJwt(token) as any;
 }

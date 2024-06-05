@@ -1,8 +1,8 @@
 import { getUserByEmail } from "../database/users.database";
+import { verifyPassword } from "../helper/password.helper";
 import responser from "../function/responser.function";
 import { Token } from "../class/token.class";
 import { Request, Response } from "express";
-import { verifyPassword } from "../helper/password.helper";
 
 export default async function loginUserService(req: Request, res: Response) {
   const { id, password }: { id: string; password: string } = req.body;

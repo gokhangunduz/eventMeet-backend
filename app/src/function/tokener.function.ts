@@ -3,7 +3,9 @@ import { getUserByID } from "../database/users.database";
 import { decodeJwt, jwtVerify, SignJWT } from "jose";
 import User from "../class/user.class";
 
-export async function generateTokens(user: User) {
+export async function generateTokens(
+  user: User
+): Promise<{ accessToken: string; refreshToken: string }> {
   const secretKey = new TextEncoder().encode(environments.jwt.secret);
 
   const accessToken = await new SignJWT({ ...user })
@@ -25,7 +27,10 @@ export async function generateTokens(user: User) {
   return { accessToken, refreshToken };
 }
 
-export async function renewTokens(refreshToken: string) {
+export async function renewTokens(refreshToken: string): Promise<{
+  accessToken: string;
+  refreshToken: string;
+}> {
   const refreshJWT = decodeJwt(refreshToken) as any;
 
   const user = await getUserByID(refreshJWT.id);

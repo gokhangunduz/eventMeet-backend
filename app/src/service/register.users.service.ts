@@ -1,15 +1,15 @@
 import environments from "../provider/environments.provider";
+import { hashPassword } from "../helper/password.helper";
 import { createUser } from "../database/users.database";
 import responser from "../function/responser.function";
 import mongoDB from "../client/mongo.client";
 import { Request, Response } from "express";
 import User from "../class/user.class";
-import { hashPassword } from "../helper/password.helper";
 
 export default async function registerUserService(req: Request, res: Response) {
   const {
-    username,
     gender,
+    username,
     nationality,
     biography,
     firstName,
@@ -75,7 +75,6 @@ export default async function registerUserService(req: Request, res: Response) {
   }
 
   const user = new User(
-    undefined,
     username,
     gender,
     nationality,

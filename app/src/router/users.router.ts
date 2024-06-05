@@ -9,6 +9,8 @@ router.post("/login", usersController.login);
 
 router.post("/renew", usersController.renew);
 
+router.post("/reset", usersController.reset);
+
 router.post("/logout", usersController.logout);
 
 export default router;
