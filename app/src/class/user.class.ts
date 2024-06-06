@@ -1,39 +1,55 @@
 import {
-  generateUserID,
   generateCurrentUnixTimeStamp,
+  generateUserId,
 } from "../helper/generator.helper";
+import {
+  IUserBiography,
+  IUserEmail,
+  IUserFirstName,
+  IUserGender,
+  IUserHobbies,
+  IUserId,
+  IUserIsVerifiedEmail,
+  IUserIsVerifiedPhone,
+  IUserLastName,
+  IUserNationality,
+  IUserPassword,
+  IUserPhone,
+  IUserRegisterAt,
+  IUserUsername,
+} from "../interface/users.interface";
 
 export default class User {
-  public id: string;
-  public username: string;
-  public gender: string;
-  public nationality: string;
-  public biography: string;
-  public firstName: string;
-  public lastName: string;
-  public phoneNumber: string;
-  public email: string;
-  public password: string;
-  public hobbies: string[];
-  public registeredAt: number;
-  public isVerifiedEmail: boolean;
-  public isVerifiedPhoneNumber: boolean;
+  public id: IUserId;
+  public username: IUserUsername;
+  public gender: IUserGender;
+  public nationality: IUserNationality;
+  public biography: IUserBiography;
+  public firstName: IUserFirstName;
+  public lastName: IUserLastName;
+  public phone: IUserPhone;
+  public email: IUserEmail;
+  public password: IUserPassword;
+  public hobbies: IUserHobbies;
+  public registeredAt: IUserRegisterAt;
+  public isVerifiedEmail: IUserIsVerifiedEmail;
+  public isVerifiedPhone: IUserIsVerifiedPhone;
 
   constructor(
-    username: string,
-    gender: string,
-    nationality: string,
-    biography: string,
-    firstName: string,
-    lastName: string,
-    phoneNumber: string,
-    email: string,
-    password: string,
-    hobbies: string[],
-    id: string = generateUserID,
-    registeredAt: number = generateCurrentUnixTimeStamp,
-    isVerifiedEmail: boolean = false,
-    isVerifiedPhoneNumber: boolean = false
+    username: IUserUsername,
+    gender: IUserGender,
+    nationality: IUserNationality,
+    biography: IUserBiography,
+    firstName: IUserFirstName,
+    lastName: IUserLastName,
+    phone: IUserPhone,
+    email: IUserEmail,
+    password: IUserPassword,
+    hobbies: IUserHobbies,
+    id: IUserId = generateUserId,
+    registeredAt: IUserRegisterAt = generateCurrentUnixTimeStamp,
+    isVerifiedEmail: IUserIsVerifiedEmail = false,
+    isVerifiedPhone: IUserIsVerifiedPhone = false
   ) {
     this.id = id;
     this.username = username;
@@ -42,12 +58,12 @@ export default class User {
     this.biography = biography;
     this.firstName = firstName;
     this.lastName = lastName;
-    this.phoneNumber = phoneNumber;
+    this.phone = phone;
     this.email = email;
     this.password = password;
     this.hobbies = hobbies;
     this.registeredAt = registeredAt;
     this.isVerifiedEmail = isVerifiedEmail;
-    this.isVerifiedPhoneNumber = isVerifiedPhoneNumber;
+    this.isVerifiedPhone = isVerifiedPhone;
   }
 }

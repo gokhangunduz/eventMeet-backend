@@ -1,5 +1,6 @@
+import { hashPassword } from "../function/cryptographer.function";
+import { IRegisterRequest } from "../interface/users.interface";
 import environments from "../provider/environments.provider";
-import { hashPassword } from "../helper/password.helper";
 import { createUser } from "../database/users.database";
 import responser from "../function/responser.function";
 import mongoDB from "../client/mongo.client";
@@ -14,22 +15,11 @@ export default async function registerUserService(req: Request, res: Response) {
     biography,
     firstName,
     lastName,
-    phoneNumber,
+    phone,
     email,
     password,
     hobbies,
-  }: {
-    username: string;
-    gender: string;
-    nationality: string;
-    biography: string;
-    firstName: string;
-    lastName: string;
-    phoneNumber: string;
-    email: string;
-    password: string;
-    hobbies: string[];
-  } = req.body;
+  }: IRegisterRequest = req.body;
 
   if (
     !username ||
@@ -39,10 +29,22 @@ export default async function registerUserService(req: Request, res: Response) {
     !hobbies ||
     !firstName ||
     !lastName ||
-    !phoneNumber ||
+    !phone ||
     !email ||
     !password
   ) {
+    console.log(
+      username,
+      gender,
+      nationality,
+      biography,
+      hobbies,
+      firstName,
+      lastName,
+      phone,
+      email,
+      password
+    );
     responser(res, 400, "Please provide all required fields.");
     return;
   }
@@ -68,7 +70,7 @@ export default async function registerUserService(req: Request, res: Response) {
   if (
     await mongoDB
       .collection(environments.database.collections.users)
-      .findOne({ phoneNumber })
+      .findOne({ phone })
   ) {
     responser(res, 400, "Phone number already exists.");
     return;
@@ -81,7 +83,7 @@ export default async function registerUserService(req: Request, res: Response) {
     biography,
     firstName,
     lastName,
-    phoneNumber,
+    phone,
     email,
     await hashPassword(password),
     hobbies

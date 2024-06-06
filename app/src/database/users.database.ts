@@ -1,6 +1,8 @@
 import environments from "../provider/environments.provider";
+import { BearerToJWT } from "../helper/converter.helper";
 import mongoDB from "../client/mongo.client";
 import User from "../class/user.class";
+import { Request } from "express";
 
 async function createUser(user: User): Promise<void> {
   await mongoDB
@@ -18,10 +20,6 @@ async function getUserByID(id: string): Promise<User | null> {
       }
     );
 
-  if (!userDB) {
-    return null;
-  }
-
   return userDB;
 }
 
@@ -35,9 +33,6 @@ async function getUserByEmail(email: string): Promise<User | null> {
       }
     );
 
-  if (!userDB) {
-    return null;
-  }
   return userDB;
 }
 
@@ -51,11 +46,17 @@ async function getUserByPhoneNumber(phoneNumber: string): Promise<User | null> {
       }
     );
 
-  if (!userDB) {
-    return null;
-  }
-
   return userDB;
+}
+
+export async function getUserByRequest(req: Request) {
+  const { authorization: bearerToken } = req.headers;
+
+  const JWTToken = BearerToJWT(bearerToken!);
+
+  const user = (await getUserByID(JWTToken.id)) as User;
+
+  return user;
 }
 
 async function updateUser(user: User): Promise<void> {

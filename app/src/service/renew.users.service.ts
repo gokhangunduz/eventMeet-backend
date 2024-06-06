@@ -2,9 +2,10 @@ import { verifyToken } from "../function/tokener.function";
 import responser from "../function/responser.function";
 import { Token } from "../class/token.class";
 import { Request, Response } from "express";
+import { IRenewRequest } from "../interface/users.interface";
 
 export default async function (req: Request, res: Response) {
-  const { accessToken, refreshToken } = req.body;
+  const { accessToken, refreshToken }: IRenewRequest = req.body;
 
   if (!accessToken || !refreshToken) {
     responser(res, 400, "Please provide all tokens.");

@@ -1,11 +1,12 @@
 import { getUserByEmail } from "../database/users.database";
-import { verifyPassword } from "../helper/password.helper";
+import { verifyPassword } from "../function/cryptographer.function";
 import responser from "../function/responser.function";
 import { Token } from "../class/token.class";
 import { Request, Response } from "express";
+import { ILoginRequest } from "../interface/users.interface";
 
 export default async function loginUserService(req: Request, res: Response) {
-  const { id, password }: { id: string; password: string } = req.body;
+  const { id, password }: ILoginRequest = req.body;
 
   if (!id || !password) {
     responser(res, 400, "Please provide all required fields.");

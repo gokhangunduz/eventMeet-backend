@@ -1,24 +1,21 @@
-import { hashPassword, verifyPassword } from "../helper/password.helper";
-import { getUserFromRequest } from "../helper/auth.helper";
-import { updateUser } from "../database/users.database";
+import {
+  hashPassword,
+  verifyPassword,
+} from "../function/cryptographer.function";
+import { getUserByRequest, updateUser } from "../database/users.database";
+import { IResetRequest } from "../interface/users.interface";
 import responser from "../function/responser.function";
 import { Request, Response } from "express";
 
 export default async function resetUsersService(req: Request, res: Response) {
-  const {
-    oldPassword,
-    newPassword,
-  }: {
-    oldPassword: string;
-    newPassword: string;
-  } = req.body;
+  const { oldPassword, newPassword }: IResetRequest = req.body;
 
   if (!oldPassword || !newPassword) {
     responser(res, 400, "Please provide all required fields.");
     return;
   }
 
-  const user = await getUserFromRequest(req);
+  const user = await getUserByRequest(req);
 
   if (!(await verifyPassword(oldPassword, user.password))) {
     responser(res, 400, "Invalid account credentials.");
