@@ -1,7 +1,7 @@
-import { Request, Response, NextFunction } from "express";
 import { requestToToken } from "../helper/converter.helper";
-import responser from "../function/responser.function";
 import { verifyToken } from "../function/tokener.function";
+import { Request, Response, NextFunction } from "express";
+import responser from "../function/responser.function";
 
 export async function requestTokenChecker(
   req: Request,
@@ -11,7 +11,8 @@ export async function requestTokenChecker(
   const excludePaths = ["/users/login", "/users/register", "/users/renew"];
 
   if (excludePaths.includes(req.path)) {
-    return next();
+    next();
+    return;
   }
 
   const token = requestToToken(req);
