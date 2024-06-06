@@ -1,3 +1,4 @@
+import { Request } from "express";
 import { decodeJwt } from "jose";
 
 export function BearerToJWT(bearerToken: string) {
@@ -10,4 +11,16 @@ export function BearerToJWT(bearerToken: string) {
 
 export function tokenToJWT(token: string) {
   return decodeJwt(token) as any;
+}
+
+export function requestToToken(req: Request) {
+  const { authorization } = req.headers;
+
+  if (!authorization) {
+    return null;
+  }
+
+  const token = authorization.split(" ")[1];
+
+  return token;
 }

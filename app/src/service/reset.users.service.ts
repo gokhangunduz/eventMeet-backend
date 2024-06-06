@@ -3,12 +3,12 @@ import {
   verifyPassword,
 } from "../function/cryptographer.function";
 import { getUserByRequest, updateUser } from "../database/users.database";
-import { IResetRequest } from "../interface/users.interface";
+import { IUserResetRequest } from "../interface/user.interface";
 import responser from "../function/responser.function";
 import { Request, Response } from "express";
 
 export default async function resetUsersService(req: Request, res: Response) {
-  const { oldPassword, newPassword }: IResetRequest = req.body;
+  const { oldPassword, newPassword }: IUserResetRequest = req.body;
 
   if (!oldPassword || !newPassword) {
     responser(res, 400, "Please provide all required fields.");

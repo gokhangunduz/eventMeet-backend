@@ -1,6 +1,4 @@
-import { IUserId } from "../interface/users.interface";
-
-export const generateUserId: IUserId = [...Array(36)]
+export const generateId: string = [...Array(48)]
   .map(() => Math.random().toString(36)[2] || "0")
   .join("");
 

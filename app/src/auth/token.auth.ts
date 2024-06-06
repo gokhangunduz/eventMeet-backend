@@ -1,0 +1,32 @@
+import { Request, Response, NextFunction } from "express";
+import { requestToToken } from "../helper/converter.helper";
+import responser from "../function/responser.function";
+import { verifyToken } from "../function/tokener.function";
+
+export async function requestTokenChecker(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
+  const excludePaths = ["/users/login", "/users/register", "/users/renew"];
+
+  if (excludePaths.includes(req.path)) {
+    return next();
+  }
+
+  const token = requestToToken(req);
+
+  if (!token) {
+    responser(res, 401, "Unauthorized. Token not found. Please login.");
+    return;
+  }
+
+  const statusToken = await verifyToken(token);
+
+  if (!statusToken.isValid) {
+    responser(res, 401, "Unauthorized. Token is invalid. Please login.");
+    return;
+  }
+
+  next();
+}

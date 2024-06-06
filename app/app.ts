@@ -1,5 +1,6 @@
 import express, { Request, Response, NextFunction } from "express";
 import environments from "./src/provider/environments.provider";
+import { requestTokenChecker } from "./src/auth/token.auth";
 import eventsRouters from "./src/router/events.router";
 import usersRouters from "./src/router/users.router";
 import logger from "./src/function/logger.function";
@@ -21,6 +22,10 @@ async function app(): Promise<void> {
     cors({
       origin: "*",
     })
+  );
+
+  app.use((req: Request, res: Response, next: NextFunction) =>
+    requestTokenChecker(req, res, next)
   );
 
   app.use("/", appRouters);

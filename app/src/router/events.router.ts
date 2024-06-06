@@ -3,12 +3,14 @@ import eventsController from "../controller/events.controller";
 
 const router = express.Router();
 
-router.get("/", eventsController.get);
+router.get("/", eventsController.getEvents);
 
-router.post("/", eventsController.post);
+router.get("/:id", eventsController.getEvent);
 
-router.put("/:id", eventsController.put);
+router.post("/", eventsController.createEvent);
 
-router.delete("/:id", eventsController.remove);
+router.put("/:id", eventsController.updateEvent);
+
+router.delete("/:id", eventsController.deleteEvent);
 
 export default router;

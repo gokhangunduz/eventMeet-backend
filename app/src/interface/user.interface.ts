@@ -1,4 +1,4 @@
-import { IAccessToken, IRefreshToken } from "./tokens.interface";
+import { IAccessToken, IRefreshToken } from "./token.interface";
 
 export type IUserId = string;
 export type IUserUsername = string;
@@ -15,7 +15,7 @@ export type IUserRegisterAt = number;
 export type IUserIsVerifiedEmail = boolean;
 export type IUserIsVerifiedPhone = boolean;
 
-export interface IRegisterRequest {
+export interface IUserRegisterRequest {
   username: IUserUsername;
   gender: IUserGender;
   nationality: IUserNationality;
@@ -28,17 +28,17 @@ export interface IRegisterRequest {
   hobbies: IUserHobbies;
 }
 
-export interface IRenewRequest {
+export interface IUserRenewRequest {
   accessToken: IAccessToken;
   refreshToken: IRefreshToken;
 }
 
-export interface ILoginRequest {
+export interface IUserLoginRequest {
   id: IUserId;
   password: IUserPassword;
 }
 
-export interface IResetRequest {
+export interface IUserResetRequest {
   oldPassword: IUserPassword;
   newPassword: IUserPassword;
 }

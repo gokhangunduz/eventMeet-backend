@@ -1,5 +1,5 @@
+import { IUserRegisterRequest } from "../interface/user.interface";
 import { hashPassword } from "../function/cryptographer.function";
-import { IRegisterRequest } from "../interface/users.interface";
 import environments from "../provider/environments.provider";
 import { createUser } from "../database/users.database";
 import responser from "../function/responser.function";
@@ -19,7 +19,7 @@ export default async function registerUserService(req: Request, res: Response) {
     email,
     password,
     hobbies,
-  }: IRegisterRequest = req.body;
+  }: IUserRegisterRequest = req.body;
 
   if (
     !username ||
@@ -33,18 +33,6 @@ export default async function registerUserService(req: Request, res: Response) {
     !email ||
     !password
   ) {
-    console.log(
-      username,
-      gender,
-      nationality,
-      biography,
-      hobbies,
-      firstName,
-      lastName,
-      phone,
-      email,
-      password
-    );
     responser(res, 400, "Please provide all required fields.");
     return;
   }
@@ -76,18 +64,18 @@ export default async function registerUserService(req: Request, res: Response) {
     return;
   }
 
-  const user = new User(
+  const user = new User({
     username,
+    firstName,
+    lastName,
     gender,
     nationality,
     biography,
-    firstName,
-    lastName,
+    hobbies,
     phone,
     email,
-    await hashPassword(password),
-    hobbies
-  );
+    password: await hashPassword(password),
+  });
 
   await createUser(user);
 
