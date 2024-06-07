@@ -1,5 +1,5 @@
 import environments from "../provider/environments.provider";
-import { BearerToJWT } from "../helper/converter.helper";
+import { getJWTFromBearerToken } from "../helper/converter.helper";
 import mongoDB from "../client/mongo.client";
 import User from "../class/user.class";
 import { Request } from "express";
@@ -52,7 +52,7 @@ async function getUserByPhoneNumber(phoneNumber: string): Promise<User | null> {
 export async function getUserByRequest(req: Request) {
   const { authorization: bearerToken } = req.headers;
 
-  const JWTToken = BearerToJWT(bearerToken!);
+  const JWTToken = getJWTFromBearerToken(bearerToken!);
 
   const user = (await getUserByID(JWTToken.id)) as User;
 

@@ -1,4 +1,4 @@
-import { requestToToken } from "../helper/converter.helper";
+import { getTokenFromRequest } from "../helper/converter.helper";
 import { verifyToken } from "../function/tokener.function";
 import { Request, Response, NextFunction } from "express";
 import responser from "../function/responser.function";
@@ -15,7 +15,7 @@ export async function requestTokenChecker(
     return;
   }
 
-  const token = requestToToken(req);
+  const token = getTokenFromRequest(req);
 
   if (!token) {
     responser(res, 401, "Unauthorized. Token not found. Please login.");

@@ -1,5 +1,5 @@
 import { IEventCreateRequest } from "../interface/event.interface";
-import { getUserByRequest } from "../database/users.database";
+import { getJWTFromRequest } from "../helper/converter.helper";
 import { createEvent } from "../database/events.database";
 import responser from "../function/responser.function";
 import { Request, Response } from "express";
@@ -20,10 +20,10 @@ export default async function createEventService(req: Request, res: Response) {
     return;
   }
 
-  const user = await getUserByRequest(req);
+  const jwtUser = getJWTFromRequest(req);
 
   const event = new Event({
-    creatorId: user.id,
+    creatorId: jwtUser.id,
     title,
     description,
     location,

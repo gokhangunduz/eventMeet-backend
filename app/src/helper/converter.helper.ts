@@ -3,19 +3,19 @@ import { IJWTToken } from "../interface/jwt.interface";
 import { Request } from "express";
 import { decodeJwt } from "jose";
 
-export function BearerToJWT(bearerToken: string): IJWTToken {
+export function getJWTFromBearerToken(bearerToken: string): IJWTToken {
   const token = bearerToken.split(" ")[1];
 
-  const JWTToken = tokenToJWT(token);
+  const JWTToken = getJWTFromToken(token);
 
   return JWTToken as IJWTToken;
 }
 
-export function tokenToJWT(token: string): IJWTToken {
+export function getJWTFromToken(token: string): IJWTToken {
   return decodeJwt(token) as IJWTToken;
 }
 
-export function requestToToken(req: Request): string | null {
+export function getTokenFromRequest(req: Request): string | null {
   const { authorization } = req.headers;
 
   if (!authorization) {
@@ -25,4 +25,12 @@ export function requestToToken(req: Request): string | null {
   const accessToken = authorization.split(" ")[1];
 
   return accessToken as IAccessToken;
+}
+
+export function getJWTFromRequest(req: Request): IJWTToken {
+  const { authorization } = req.headers;
+
+  const accessToken = authorization!.split(" ")[1];
+
+  return getJWTFromToken(accessToken) as IJWTToken;
 }

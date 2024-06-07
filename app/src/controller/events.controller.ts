@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import createEventService from "../service/create.events.service";
 import responser from "../function/responser.function";
 import getEventsService from "../service/get.events.service";
+import getEventService from "../service/get.event.service";
 
 async function getEvents(req: Request, res: Response) {
   try {
@@ -12,7 +13,11 @@ async function getEvents(req: Request, res: Response) {
 }
 
 async function getEvent(req: Request, res: Response) {
-  // get all events
+  try {
+    await getEventService(req, res);
+  } catch (error) {
+    responser(res, 500, "Internal server error. Please try again later.");
+  }
 }
 
 async function createEvent(req: Request, res: Response) {
