@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc",
     "dev": "nodemon app/app.ts",
-    "bundle": "ncc build app/app.ts -o dist"
+    "bundle": "ncc build app/app.ts -o bundle -m -d"
   },
   "author": "gokhangunduz",
   "license": "Apache-2.0",

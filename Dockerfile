@@ -5,6 +5,6 @@ WORKDIR /app
 RUN npm install
 RUN npm run bundle
 FROM node:alpine as production-stage
-COPY --from=build-stage /app/dist /app
+COPY --from=build-stage /app/bundle /app
 EXPOSE 8077
 ENTRYPOINT [ "node","/app/index.js" ]
