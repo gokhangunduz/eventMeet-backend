@@ -1,9 +1,9 @@
-import { IEventCreateRequest } from "../interface/event.interface";
-import { getJWTFromRequest } from "../helper/converter.helper";
-import { createEvent } from "../database/events.database";
-import responser from "../function/responser.function";
+import { IEventCreateRequest } from "../../interface/event.interface";
+import { getJWTFromRequest } from "../../helper/converter.helper";
+import { createEvent } from "../../database/events.database";
+import responser from "../../function/responser.function";
 import { Request, Response } from "express";
-import Event from "../class/event.class";
+import Event from "../../class/event.class";
 
 export default async function createEventService(req: Request, res: Response) {
   const {

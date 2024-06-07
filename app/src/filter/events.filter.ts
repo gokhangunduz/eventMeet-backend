@@ -1,12 +1,12 @@
-import { getJWTFromRequest } from "../helper/converter.helper";
-import { Request } from "express-serve-static-core";
+import { hasOwnerAtEvent } from "../auth/role.auth";
 import Event from "../class/event.class";
+import { Request } from "express";
 
 export default function eventsFilter(req: Request, events: Event[]) {
-  const jwtUser = getJWTFromRequest(req);
-
   const filteredEvents = events.map((event) => {
-    if (event.creatorId !== jwtUser.id) {
+    const hasOwner = hasOwnerAtEvent(req, event);
+
+    if (!hasOwner) {
       const { decllinedList, requesterList, acceptedList, ...filteredEvent } =
         event;
 

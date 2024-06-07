@@ -1,10 +1,10 @@
-import createEventService from "../service/create.events.service";
-import updateEventService from "../service/update.event.service";
-import getEventsService from "../service/get.events.service";
-import getEventService from "../service/get.event.service";
+import createEventService from "../service/events/create.service";
+import updateEventService from "../service/events/update.service";
+import getEventService from "../service/events/getSingle.service";
+import deleteEventService from "../service/events/delete.service";
+import getEventsService from "../service/events/get.service";
 import responser from "../function/responser.function";
 import { Request, Response } from "express";
-import deleteEventService from "../service/delete.event.service";
 
 async function getEvents(req: Request, res: Response) {
   try {

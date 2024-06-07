@@ -1,12 +1,22 @@
-import { getEventByID, updateEvent } from "../database/events.database";
-import { getJWTFromRequest } from "../helper/converter.helper";
-import responser from "../function/responser.function";
+import {
+  IEventUpdateParams,
+  IEventUpdateRequest,
+} from "../../interface/event.interface";
+import { getEventByID, updateEvent } from "../../database/events.database";
+import responser from "../../function/responser.function";
+import { hasOwnerAtEvent } from "../../auth/role.auth";
 import { Request, Response } from "express";
 
 export default async function updateEventService(req: Request, res: Response) {
-  const { id } = req.params;
-  const { title, description, location, startAt, endAt, participantList } =
-    req.body;
+  const { id }: IEventUpdateParams = req.params as { id: string };
+  const {
+    title,
+    description,
+    location,
+    startAt,
+    endAt,
+    participantList,
+  }: IEventUpdateRequest = req.body;
 
   if (
     !id ||
@@ -21,8 +31,6 @@ export default async function updateEventService(req: Request, res: Response) {
     return;
   }
 
-  const jwtUser = getJWTFromRequest(req);
-
   const oldEvent = await getEventByID(id);
 
   if (!oldEvent) {
@@ -30,7 +38,9 @@ export default async function updateEventService(req: Request, res: Response) {
     return;
   }
 
-  if (oldEvent.creatorId !== jwtUser.id) {
+  const hasOwner = hasOwnerAtEvent(req, oldEvent);
+
+  if (!hasOwner) {
     responser(
       res,
       401,

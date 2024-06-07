@@ -1,11 +1,11 @@
-import { IUserRegisterRequest } from "../interface/user.interface";
-import { hashPassword } from "../function/cryptographer.function";
-import environments from "../provider/environments.provider";
-import { createUser } from "../database/users.database";
-import responser from "../function/responser.function";
-import mongoDB from "../client/mongo.client";
+import { IUserRegisterRequest } from "../../interface/user.interface";
+import { hashPassword } from "../../function/cryptographer.function";
+import environments from "../../provider/environments.provider";
+import { createUser } from "../../database/users.database";
+import responser from "../../function/responser.function";
+import mongoDB from "../../client/mongo.client";
 import { Request, Response } from "express";
-import User from "../class/user.class";
+import User from "../../class/user.class";
 
 export default async function registerUserService(req: Request, res: Response) {
   const {

@@ -1,10 +1,11 @@
-import { getEventByID } from "../database/events.database";
-import responser from "../function/responser.function";
-import eventsFilter from "../filter/events.filter";
+import { IEventGetSingleParams } from "../../interface/event.interface";
+import { getEventByID } from "../../database/events.database";
+import responser from "../../function/responser.function";
+import eventsFilter from "../../filter/events.filter";
 import { Request, Response } from "express";
 
 export default async function getEventService(req: Request, res: Response) {
-  const { id } = req.params;
+  const { id }: IEventGetSingleParams = req.params as { id: string };
 
   if (!id) {
     responser(res, 400, "Please provide all required fields.");

@@ -1,9 +1,9 @@
-import { getUserByEmail } from "../database/users.database";
-import { verifyPassword } from "../function/cryptographer.function";
-import responser from "../function/responser.function";
-import Token from "../class/token.class";
+import { verifyPassword } from "../../function/cryptographer.function";
+import { IUserLoginRequest } from "../../interface/user.interface";
+import { getUserByEmail } from "../../database/users.database";
+import responser from "../../function/responser.function";
+import Token from "../../class/token.class";
 import { Request, Response } from "express";
-import { IUserLoginRequest } from "../interface/user.interface";
 
 export default async function loginUserService(req: Request, res: Response) {
   const { id, password }: IUserLoginRequest = req.body;

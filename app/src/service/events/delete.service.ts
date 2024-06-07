@@ -1,21 +1,22 @@
+import { deleteEvent, getEventByID } from "../../database/events.database";
+import { IEventDeleteParams } from "../../interface/event.interface";
+import responser from "../../function/responser.function";
+import { hasOwnerAtEvent } from "../../auth/role.auth";
 import { Request, Response } from "express";
-import { deleteEvent, getEventByID } from "../database/events.database";
-import responser from "../function/responser.function";
-import { getJWTFromRequest } from "../helper/converter.helper";
 
 export default async function deleteEventService(req: Request, res: Response) {
-  const { id } = req.params;
+  const { id }: IEventDeleteParams = req.params as { id: string };
 
   const oldEvent = await getEventByID(id);
-
-  const jwtUser = getJWTFromRequest(req);
 
   if (!oldEvent) {
     responser(res, 404, "Event not found.");
     return;
   }
 
-  if (oldEvent.creatorId !== jwtUser.id) {
+  const hasOwner = hasOwnerAtEvent(req, oldEvent);
+
+  if (!hasOwner) {
     responser(
       res,
       401,

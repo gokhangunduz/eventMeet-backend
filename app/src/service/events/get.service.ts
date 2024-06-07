@@ -1,6 +1,6 @@
-import { getEvents } from "../database/events.database";
-import responser from "../function/responser.function";
-import eventsFilter from "../filter/events.filter";
+import { getEvents } from "../../database/events.database";
+import responser from "../../function/responser.function";
+import eventsFilter from "../../filter/events.filter";
 import { Request, Response } from "express";
 
 export default async function getEventsService(req: Request, res: Response) {

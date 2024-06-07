@@ -1,8 +1,8 @@
-import registerUserService from "../service/register.users.service";
-import refreshUsersService from "../service/renew.users.service";
-import logoutUserService from "../service/logout.users.service";
-import resetUsersService from "../service/reset.users.service";
-import loginUserService from "../service/login.users.service";
+import registerUserService from "../service/users/register.service";
+import refreshUsersService from "../service/users/renew.service";
+import logoutUserService from "../service/users/logout.service";
+import resetUsersService from "../service/users/reset.service";
+import loginUserService from "../service/users/login.service";
 import responser from "../function/responser.function";
 import { Request, Response } from "express";
 

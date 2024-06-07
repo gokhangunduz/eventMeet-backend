@@ -1,10 +1,10 @@
 import {
   hashPassword,
   verifyPassword,
-} from "../function/cryptographer.function";
-import { getUserByRequest, updateUser } from "../database/users.database";
-import { IUserResetRequest } from "../interface/user.interface";
-import responser from "../function/responser.function";
+} from "../../function/cryptographer.function";
+import { getUserByRequest, updateUser } from "../../database/users.database";
+import { IUserResetRequest } from "../../interface/user.interface";
+import responser from "../../function/responser.function";
 import { Request, Response } from "express";
 
 export default async function resetUsersService(req: Request, res: Response) {

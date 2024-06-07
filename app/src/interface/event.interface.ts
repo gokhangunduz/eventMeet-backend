@@ -22,3 +22,24 @@ export interface IEventCreateRequest {
   endAt: IEventEndAt;
   participantList: IEventParticipantList;
 }
+
+export interface IEventGetSingleParams {
+  id: IEventId;
+}
+
+export interface IEventUpdateRequest {
+  title: IEventTitle;
+  description: IEventDescription;
+  location: IEventLocation;
+  startAt: IEventStartAt;
+  endAt: IEventEndAt;
+  participantList: IEventParticipantList;
+}
+
+export interface IEventUpdateParams {
+  id: IEventId;
+}
+
+export interface IEventDeleteParams {
+  id: IEventId;
+}
