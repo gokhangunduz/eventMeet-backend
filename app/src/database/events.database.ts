@@ -45,4 +45,10 @@ async function updateEvent(event: Event) {
     );
 }
 
-export { createEvent, getEvents, getEventByID, updateEvent };
+async function deleteEvent(id: string) {
+  await mongoDB
+    .collection<Event>(environments.database.collections.events)
+    .deleteOne({ id });
+}
+
+export { createEvent, getEvents, getEventByID, updateEvent, deleteEvent };

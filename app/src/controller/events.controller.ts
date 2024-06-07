@@ -1,8 +1,10 @@
-import { Request, Response } from "express";
 import createEventService from "../service/create.events.service";
-import responser from "../function/responser.function";
+import updateEventService from "../service/update.event.service";
 import getEventsService from "../service/get.events.service";
 import getEventService from "../service/get.event.service";
+import responser from "../function/responser.function";
+import { Request, Response } from "express";
+import deleteEventService from "../service/delete.event.service";
 
 async function getEvents(req: Request, res: Response) {
   try {
@@ -29,11 +31,19 @@ async function createEvent(req: Request, res: Response) {
 }
 
 async function updateEvent(req: Request, res: Response) {
-  // update an event
+  try {
+    await updateEventService(req, res);
+  } catch (error) {
+    responser(res, 500, "Internal server error. Please try again later.");
+  }
 }
 
 async function deleteEvent(req: Request, res: Response) {
-  // delete an event
+  try {
+    await deleteEventService(req, res);
+  } catch (error) {
+    responser(res, 500, "Internal server error. Please try again later.");
+  }
 }
 
 export default {

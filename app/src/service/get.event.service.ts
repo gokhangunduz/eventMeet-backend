@@ -13,6 +13,11 @@ export default async function getEventService(req: Request, res: Response) {
 
   const event = await getEventByID(id);
 
+  if (!event) {
+    responser(res, 404, "Event not found.");
+    return;
+  }
+
   const filteredEvent = eventsFilter(req, [event!])?.[0];
 
   responser(res, 200, "Event retrieved successfully", filteredEvent);
