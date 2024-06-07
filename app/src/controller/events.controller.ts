@@ -1,9 +1,14 @@
 import { Request, Response } from "express";
 import createEventService from "../service/create.events.service";
 import responser from "../function/responser.function";
+import getEventsService from "../service/get.events.service";
 
 async function getEvents(req: Request, res: Response) {
-  // get all events
+  try {
+    await getEventsService(req, res);
+  } catch (error) {
+    responser(res, 500, "Internal server error. Please try again later.");
+  }
 }
 
 async function getEvent(req: Request, res: Response) {

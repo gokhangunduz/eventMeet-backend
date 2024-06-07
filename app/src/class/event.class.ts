@@ -1,5 +1,5 @@
 import {
-  generateCurrentUnixTimeStamp,
+  getCurrentUnixTimeStamp,
   generateId,
 } from "../helper/generator.helper";
 import {
@@ -50,9 +50,9 @@ export default class Event {
   public decllinedList: IEventDecllinedList;
 
   constructor({
-    id = generateId,
+    id = generateId(),
     creatorId,
-    createdAt = generateCurrentUnixTimeStamp,
+    createdAt = getCurrentUnixTimeStamp(),
     updatedAt = null,
     title,
     description,

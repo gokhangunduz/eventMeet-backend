@@ -1,5 +1,5 @@
 import {
-  generateCurrentUnixTimeStamp,
+  getCurrentUnixTimeStamp,
   generateId,
 } from "../helper/generator.helper";
 import {
@@ -53,8 +53,8 @@ export default class User {
   public isVerifiedPhone: IUserIsVerifiedPhone;
 
   constructor({
-    id = generateId,
-    registeredAt = generateCurrentUnixTimeStamp,
+    id = generateId(),
+    registeredAt = getCurrentUnixTimeStamp(),
     username,
     firstName,
     lastName,
