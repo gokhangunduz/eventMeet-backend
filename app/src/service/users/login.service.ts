@@ -8,10 +8,6 @@ import { Request, Response } from "express";
 export default async function loginUserService(req: Request, res: Response) {
   const { id, password }: IUserLoginRequest = req.body;
 
-  if (!id || !password) {
-    responser(res, 400, "Please provide all required fields.");
-  }
-
   const user = await getUserByEmail(id);
 
   if (!user) {

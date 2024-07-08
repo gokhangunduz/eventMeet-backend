@@ -10,11 +10,6 @@ import { Request, Response } from "express";
 export default async function resetUsersService(req: Request, res: Response) {
   const { oldPassword, newPassword }: IUserResetRequest = req.body;
 
-  if (!oldPassword || !newPassword) {
-    responser(res, 400, "Please provide all required fields.");
-    return;
-  }
-
   const user = await getUserByRequest(req);
 
   if (!(await verifyPassword(oldPassword, user.password))) {

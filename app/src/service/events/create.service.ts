@@ -15,11 +15,6 @@ export default async function createEventService(req: Request, res: Response) {
     participantList,
   }: IEventCreateRequest = req.body;
 
-  if (!title || !description || !location || !startAt || !endAt) {
-    responser(res, 400, "Please provide all required fields.");
-    return;
-  }
-
   const jwtUser = getJWTFromRequest(req);
 
   const event = new Event({

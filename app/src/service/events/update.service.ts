@@ -18,19 +18,6 @@ export default async function updateEventService(req: Request, res: Response) {
     participantList,
   }: IEventUpdateRequest = req.body;
 
-  if (
-    !id ||
-    !title ||
-    !description ||
-    !location ||
-    !startAt ||
-    !endAt ||
-    !participantList
-  ) {
-    responser(res, 400, "Please provide all required fields.");
-    return;
-  }
-
   const oldEvent = await getEventByID(id);
 
   if (!oldEvent) {

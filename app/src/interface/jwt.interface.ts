@@ -1,9 +1,10 @@
-import User from "../class/user.class";
+import { IUserId } from "./user.interface";
 
 export type Iiat = number;
 export type Iexp = number;
 
-export interface IJWTToken extends User {
+export interface IJWTToken {
+  id: IUserId;
   iat: Iiat;
   exp: Iexp;
 }

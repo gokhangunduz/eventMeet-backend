@@ -1,5 +1,5 @@
 export function generateId(): string {
-  return [...Array(48)]
+  return [...Array(24)]
     .map(() => Math.random().toString(36)[2] || "0")
     .join("");
 }

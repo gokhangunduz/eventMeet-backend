@@ -1,14 +1,14 @@
-import registerUserService from "../service/users/register.service";
 import refreshUsersService from "../service/users/renew.service";
+import signupUserService from "../service/users/signup.service";
 import logoutUserService from "../service/users/logout.service";
 import resetUsersService from "../service/users/reset.service";
 import loginUserService from "../service/users/login.service";
 import responser from "../function/responser.function";
 import { Request, Response } from "express";
 
-async function register(req: Request, res: Response) {
+async function signup(req: Request, res: Response) {
   try {
-    await registerUserService(req, res);
+    await signupUserService(req, res);
   } catch (error) {
     responser(res, 500, "Internal server error.");
   }
@@ -47,7 +47,7 @@ async function logout(req: Request, res: Response) {
 }
 
 export default {
-  register,
+  signup,
   login,
   renew,
   reset,

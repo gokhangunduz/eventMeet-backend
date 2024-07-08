@@ -7,10 +7,6 @@ import Token from "../../class/token.class";
 export default async function (req: Request, res: Response) {
   const { accessToken, refreshToken }: IUserRenewRequest = req.body;
 
-  if (!accessToken || !refreshToken) {
-    responser(res, 400, "Please provide all tokens.");
-  }
-
   if (!(await verifyToken(refreshToken)).isValid) {
     responser(res, 400, "Invalid refresh token.");
   }

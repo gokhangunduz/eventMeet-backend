@@ -4,6 +4,7 @@ import {
 } from "../helper/generator.helper";
 import {
   IEventAcceptedList,
+  IEventComments,
   IEventCreatedAt,
   IEventCreatorId,
   IEventDecllinedList,
@@ -28,17 +29,18 @@ interface EventParams {
   location: IEventLocation;
   startAt: IEventStartAt;
   endAt: IEventEndAt;
-  participantList: IEventParticipantList;
+  participantList?: IEventParticipantList;
   requesterList?: IEventRequesterList;
   acceptedList?: IEventAcceptedList;
   decllinedList?: IEventDecllinedList;
+  comments?: IEventComments;
 }
 
 export default class Event {
   public id: IEventId;
   public creatorId: IEventCreatorId;
   public createdAt: IEventCreatedAt;
-  public updatedAt: IEventUpdatedAt;
+  public updatedAt?: IEventUpdatedAt;
   public title: IEventTitle;
   public description: IEventDescription;
   public location: IEventLocation;
@@ -48,21 +50,23 @@ export default class Event {
   public requesterList: IEventRequesterList;
   public acceptedList: IEventAcceptedList;
   public decllinedList: IEventDecllinedList;
+  public comments: IEventComments;
 
   constructor({
     id = generateId(),
     creatorId,
     createdAt = getCurrentUnixTimeStamp(),
-    updatedAt = null,
+    updatedAt = undefined,
     title,
     description,
     location,
     startAt,
     endAt,
-    participantList,
+    participantList = [],
     requesterList = [],
     acceptedList = [],
     decllinedList = [],
+    comments = [],
   }: EventParams) {
     this.id = id;
     this.creatorId = creatorId;
@@ -77,5 +81,6 @@ export default class Event {
     this.requesterList = requesterList;
     this.acceptedList = acceptedList;
     this.decllinedList = decllinedList;
+    this.comments = comments;
   }
 }

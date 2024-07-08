@@ -8,7 +8,7 @@ export async function requestTokenChecker(
   res: Response,
   next: NextFunction
 ) {
-  const excludePaths = ["/users/login", "/users/register", "/users/renew"];
+  const excludePaths = ["/users/login", "/users/signup", "/users/renew"];
 
   if (excludePaths.includes(req.path)) {
     next();

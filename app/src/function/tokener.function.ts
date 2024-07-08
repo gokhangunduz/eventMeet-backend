@@ -8,7 +8,9 @@ export async function generateTokens(
 ): Promise<{ accessToken: string; refreshToken: string }> {
   const secretKey = new TextEncoder().encode(environments.jwt.secret);
 
-  const accessToken = await new SignJWT({ ...user })
+  const { id } = user;
+
+  const accessToken = await new SignJWT({ id })
     .setProtectedHeader({
       alg: "HS256",
     })
@@ -16,7 +18,7 @@ export async function generateTokens(
     .setExpirationTime(environments.jwt.accessTokenExp)
     .sign(Uint8Array.from(secretKey));
 
-  const refreshToken = await new SignJWT({ ...user })
+  const refreshToken = await new SignJWT({ id })
     .setProtectedHeader({
       alg: "HS256",
     })
